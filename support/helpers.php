@@ -1,33 +1,12 @@
 <?php
 
-/**
- * This file is part of webman.
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the MIT-LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @author    walkor<walkor@workerman.net>
- * @copyright walkor<walkor@workerman.net>
- * @link      http://www.workerman.net/
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- */
-
 use support\Container;
 use support\Request;
 use support\Response;
 use support\Translation;
-use support\view\Blade;
-use support\view\Raw;
-use support\view\ThinkPHP;
-use support\view\Twig;
-use Twig\Error\LoaderError;
-use Twig\Error\RuntimeError;
-use Twig\Error\SyntaxError;
 use Webman\App;
 use Webman\Config;
 use Webman\Route;
-use Workerman\Protocols\Http\Session;
 use Workerman\Worker;
 
 // Project base path
@@ -202,58 +181,6 @@ function view(string $template, array $vars = [], string $app = null, string $pl
 }
 
 /**
- * Raw view response
- * @param string $template
- * @param array $vars
- * @param string|null $app
- * @return Response
- * @throws Throwable
- */
-function raw_view(string $template, array $vars = [], string $app = null): Response
-{
-    return new Response(200, [], Raw::render($template, $vars, $app));
-}
-
-/**
- * Blade view response
- * @param string $template
- * @param array $vars
- * @param string|null $app
- * @return Response
- */
-function blade_view(string $template, array $vars = [], string $app = null): Response
-{
-    return new Response(200, [], Blade::render($template, $vars, $app));
-}
-
-/**
- * Think view response
- * @param string $template
- * @param array $vars
- * @param string|null $app
- * @return Response
- */
-function think_view(string $template, array $vars = [], string $app = null): Response
-{
-    return new Response(200, [], ThinkPHP::render($template, $vars, $app));
-}
-
-/**
- * Twig view response
- * @param string $template
- * @param array $vars
- * @param string|null $app
- * @return Response
- * @throws LoaderError
- * @throws RuntimeError
- * @throws SyntaxError
- */
-function twig_view(string $template, array $vars = [], string $app = null): Response
-{
-    return new Response(200, [], Twig::render($template, $vars, $app));
-}
-
-/**
  * Get request
  * @return \Webman\Http\Request|Request|null
  */
@@ -298,36 +225,6 @@ function route(string $name, ...$parameters): string
 }
 
 /**
- * Session
- * @param mixed $key
- * @param mixed $default
- * @return mixed|bool|Session
- */
-function session($key = null, $default = null)
-{
-    $session = \request()->session();
-    if (null === $key) {
-        return $session;
-    }
-    if (is_array($key)) {
-        $session->put($key);
-        return null;
-    }
-    if (strpos($key, '.')) {
-        $keyArray = explode('.', $key);
-        $value = $session->all();
-        foreach ($keyArray as $index) {
-            if (!isset($value[$index])) {
-                return $default;
-            }
-            $value = $value[$index];
-        }
-        return $value;
-    }
-    return $session->get($key, $default);
-}
-
-/**
  * Translation
  * @param string $id
  * @param array $parameters
@@ -356,15 +253,6 @@ function locale(string $locale = null): string
 }
 
 /**
- * 404 not found
- * @return Response
- */
-function not_found(): Response
-{
-    return new Response(404, [], file_get_contents(public_path() . '/404.html'));
-}
-
-/**
  * Copy dir
  * @param string $source
  * @param string $dest
@@ -383,7 +271,7 @@ function copy_dir(string $source, string $dest, bool $overwrite = false)
                 copy_dir("$source/$file", "$dest/$file", $overwrite);
             }
         }
-    } else if (file_exists($source) && ($overwrite || !file_exists($dest))) {
+    } elseif (file_exists($source) && ($overwrite || !file_exists($dest))) {
         copy($source, $dest);
     }
 }
@@ -517,7 +405,7 @@ function cpu_count(): int
 }
 
 /**
- * Get request parameters, if no parameter name is passed, an array of all values is returned, default values is supported
+ * 获取请求参数，如果没有传递参数名，则返回所有值的数组，支持默认值
  * @param string|null $param param's name
  * @param mixed|null $default default value
  * @return mixed|null
