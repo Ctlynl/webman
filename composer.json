@@ -25,6 +25,8 @@
   },
   "require": {
     "php": ">=7.2",
+    "ext-json": "*",
+    "ext-simplexml": "*",
     "workerman/webman-framework": "^1.5.0",
     "monolog/monolog": "^2.0",
     "webman/console": "^1.3",
