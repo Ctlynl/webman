@@ -1,16 +1,4 @@
 <?php
-/**
- * This file is part of webman.
- *
- * Licensed under The MIT License
- * For full copyright and license information, please see the MIT-LICENSE.txt
- * Redistributions of files must retain the above copyright notice.
- *
- * @author    walkor<walkor@workerman.net>
- * @copyright walkor<walkor@workerman.net>
- * @link      http://www.workerman.net/
- * @license   http://www.opensource.org/licenses/mit-license.php MIT License
- */
 
 namespace process;
 
@@ -89,7 +77,7 @@ class Monitor
         }
         $disableFunctions = explode(',', ini_get('disable_functions'));
         if (in_array('exec', $disableFunctions, true)) {
-            echo "\nMonitor file change turned off because exec() has been disabled by disable_functions setting in " . PHP_CONFIG_FILE_PATH . "/php.ini\n";
+            echo "\n监视器文件更改已关闭，因为在disable_functions中设置了禁用exec() " . PHP_CONFIG_FILE_PATH . "/php.ini\n";
         } else {
             if ($options['enable_file_monitor'] ?? true) {
                 Timer::add(1, function () {
@@ -122,12 +110,14 @@ class Monitor
             $iterator = [new SplFileInfo($monitorDir)];
         } else {
             // recursive traversal directory
-            $dirIterator = new RecursiveDirectoryIterator($monitorDir, FilesystemIterator::SKIP_DOTS | FilesystemIterator::FOLLOW_SYMLINKS);
+            $dirIterator = new RecursiveDirectoryIterator(
+                $monitorDir, FilesystemIterator::SKIP_DOTS | FilesystemIterator::FOLLOW_SYMLINKS
+            );
             $iterator = new RecursiveIteratorIterator($dirIterator);
         }
         $count = 0;
         foreach ($iterator as $file) {
-            $count ++;
+            $count++;
             /** var SplFileInfo $file */
             if (is_dir($file->getRealPath())) {
                 continue;
@@ -135,7 +125,7 @@ class Monitor
             // check mtime
             if (in_array($file->getExtension(), $this->extensions, true) && $lastMtime < $file->getMTime()) {
                 $var = 0;
-                exec('"'.PHP_BINARY . '" -l ' . $file, $out, $var);
+                exec('"' . PHP_BINARY . '" -l ' . $file, $out, $var);
                 $lastMtime = $file->getMTime();
                 if ($var) {
                     continue;
@@ -151,7 +141,7 @@ class Monitor
             }
         }
         if (!$tooManyFilesCheck && $count > 1000) {
-            echo "Monitor: There are too many files ($count files) in $monitorDir which makes file monitoring very slow\n";
+            echo "Monitor: $monitorDir 中有($count files)这使得文件监控非常慢\n";
             $tooManyFilesCheck = 1;
         }
         return false;
@@ -225,9 +215,9 @@ class Monitor
         $unit = strtolower($memoryLimit[strlen($memoryLimit) - 1]);
         if ($unit === 'g') {
             $memoryLimit = 1024 * (int)$memoryLimit;
-        } else if ($unit === 'm') {
+        } elseif ($unit === 'm') {
             $memoryLimit = (int)$memoryLimit;
-        } else if ($unit === 'k') {
+        } elseif ($unit === 'k') {
             $memoryLimit = ((int)$memoryLimit / 1024);
         } else {
             $memoryLimit = ((int)$memoryLimit / (1024 * 1024));
