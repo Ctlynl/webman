@@ -26,6 +26,8 @@
   "require": {
     "php": ">=7.2",
     "ext-json": "*",
+    "ext-pcntl": "*",
+    "ext-posix": "*",
     "ext-simplexml": "*",
     "workerman/webman-framework": "^1.5.0",
     "monolog/monolog": "^2.0",
