@@ -1,0 +1,11 @@
+/runtime
+/.idea
+/.vscode
+/vendor
+*.log
+.env
+windows.php
+windows.bat
+start.php
+/tests/tmp
+/tests/.phpunit.result.cache
