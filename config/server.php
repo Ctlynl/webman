@@ -1,11 +1,11 @@
 <?php
 
 return [
-    'listen' => 'http://0.0.0.0:8787',
+    'listen' => getenv('SERVER_LISTEN'),
     'transport' => 'tcp',
     'context' => [],
-    'name' => 'webman',
-    'count' => cpu_count() * 4,
+    'name' => getenv('APP_NAME'),
+    'count' => getenv('SERVER_COUNT'),
     'user' => '',
     'group' => '',
     'reusePort' => false,
