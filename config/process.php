@@ -16,6 +16,7 @@ return [
                 base_path() . '/support',
                 base_path() . '/resource',
                 base_path() . '/.env',
+                base_path() . '/routes',
             ], glob(
                 base_path() . '/plugin/*/app'),
                 glob(base_path() . '/plugin/*/config'),
