@@ -16,5 +16,12 @@ return [
                 ],
             ]
         ],
-    ],
+        'processor' => function ($record) {
+            // 将request-id添加到extra字段中
+            if ($requestId = getProjectRequestId()) {
+                $record['extra']['requestId'] = $requestId;
+            }
+            return $record;
+        }
+    ]
 ];
