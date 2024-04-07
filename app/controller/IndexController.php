@@ -2,27 +2,13 @@
 
 namespace app\controller;
 
-use support\Request;
+use app\support\ApiResponse;
+use support\Response;
 
 class IndexController
 {
-    public function index(Request $request)
+    public function index(): Response
     {
-        static $readme;
-        if (!$readme) {
-            $readme = file_get_contents(base_path('README.md'));
-        }
-        return $readme;
+        return ApiResponse::success();
     }
-
-    public function view(Request $request)
-    {
-        return view('index/view', ['name' => 'webman']);
-    }
-
-    public function json(Request $request)
-    {
-        return json(['code' => 0, 'msg' => 'ok']);
-    }
-
 }
