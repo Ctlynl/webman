@@ -28,7 +28,7 @@ class ApiResponse
         return new Response(200, ['Content-Type' => 'application/json'], $jsonData);
     }
 
-    public static function success(array $data): Response
+    public static function success(array $data = []): Response
     {
         return (new ApiResponse(StatusCode::SUCCESS, $data))->response();
     }
