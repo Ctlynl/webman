@@ -38,7 +38,8 @@
     "php-di/php-di": "^6",
     "doctrine/annotations": "^1.14",
     "ramsey/uuid": "^4.7",
-    "tinywan/validate": "^1.0"
+    "tinywan/validate": "^1.0",
+    "illuminate/database": "^10.48"
   },
   "suggest": {
     "ext-event": "For better performance. "
