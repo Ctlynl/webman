@@ -3,9 +3,9 @@
 use support\Request;
 
 return [
-    'debug' => getenv('APP_DEBUG'),
+    'debug' => true,
     'error_reporting' => E_ALL,
-    'default_timezone' => getenv('APP_DEFAULT_TIMEZONE'),
+    'default_timezone' => 'Asia/Shanghai',
     'request_class' => Request::class,
     'public_path' => base_path() . DIRECTORY_SEPARATOR . 'public',
     'runtime_path' => base_path(false) . DIRECTORY_SEPARATOR . 'runtime',
