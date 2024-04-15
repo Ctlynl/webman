@@ -5,6 +5,7 @@ namespace app\support;
 use app\constant\StatusCode;
 use app\exception\AppException;
 use support\Response;
+use Tinywan\Validate\Exception\ValidateException;
 
 class ApiResponse
 {
@@ -36,6 +37,13 @@ class ApiResponse
     public static function errorByAppException(AppException $appException): Response
     {
         return (new ApiResponse($appException->getCode()))->response();
+    }
+
+    public static function errorByValidateException(ValidateException $validateException): Response
+    {
+        return (new ApiResponse(StatusCode::REQUEST_PARAM_ERROR))->response(
+            ['errors' => $validateException->getError()]
+        );
     }
 
     public static function errorSystem(array $otherBody = []): Response
