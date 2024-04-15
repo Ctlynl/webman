@@ -18,17 +18,17 @@ class Monitor
     /**
      * @var array
      */
-    protected $paths = [];
+    protected array $paths = [];
 
     /**
      * @var array
      */
-    protected $extensions = [];
+    protected array $extensions = [];
 
     /**
      * @var string
      */
-    public static $lockFile = __DIR__ . '/../runtime/monitor.lock';
+    public static string $lockFile = __DIR__ . '/../runtime/monitor.lock';
 
     /**
      * Pause monitor
