@@ -6,7 +6,6 @@
 .env
 windows.php
 windows.bat
-start.php
 /tests/tmp
 /tests/.phpunit.result.cache
 /build
