@@ -32,7 +32,8 @@ class PullNacosConfig extends Command
                     $output->writeln("<error>{$client->config->getMessage()}</error>");
                     return self::FAILURE;
                 }
-                file_put_contents($configPath, $configValue, LOCK_EX);
+                file_put_contents($configPath, $configValue);
+                $output->writeln("{$configPath}写入成功");
             }
         } else {
             // 如果nacos配置没有开启,则自己引入config配置文件
