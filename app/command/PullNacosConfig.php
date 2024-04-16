@@ -25,7 +25,7 @@ class PullNacosConfig extends Command
         $config = config('plugin.workbunny.webman-nacos.app');
         if (!empty($config['enable'])) {
             $client = \Workbunny\WebmanNacos\Client::channel();
-            foreach ($config['my_init_configs'] as $value) {
+            foreach (array_merge($config['my_init_configs'], $config['config_listeners']) as $value) {
                 list($dataId, $group, $tenant, $configPath) = $value;
                 $configValue = $client->config->get($dataId, $group, $tenant);
                 if ($configValue === false) {

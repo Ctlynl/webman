@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 return [
     'default' => [
-        'host' => getenv('NACOS_HOST'),
-        'port' => getenv('NACOS_PORT'),
+        'host' => getenv('NACOS_HOST') ?: 'localhost',
+        'port' => getenv('NACOS_PORT') ?: 8848,
         'username' => getenv('NACOS_USER') ?: null,
         'password' => getenv('NACOS_PASS') ?: null,
         // 阿里云微服务引擎MSE

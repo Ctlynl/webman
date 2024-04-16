@@ -10,3 +10,6 @@ start.php
 /tests/tmp
 /tests/.phpunit.result.cache
 /build
+/config/server.php
+/config/redis.php
+/config/database.php

@@ -1,8 +1,8 @@
 <?php declare(strict_types=1);
 return [
     'enable' => filter_var(getenv('NACOS_ENABLE'), FILTER_VALIDATE_BOOLEAN) ?: false,
-    'host' => getenv('NACOS_HOST'),
-    'port' => getenv('NACOS_PORT'),
+    'host' => getenv('NACOS_HOST') ?: 'localhost',
+    'port' => getenv('NACOS_PORT') ?: 8848,
     'username' => getenv('NACOS_USER') ?: null,
     'password' => getenv('NACOS_PASS') ?: null,
     // 阿里云微服务引擎MSE
@@ -47,17 +47,17 @@ return [
             config_path('database.php')
         ]
     ],
-    // 启动初始化配置文件，进程启动后不会动态修改
+    // 启动初始化配置文件也会初始化config_listeners下的配置，my_init_configs配置下进程启动后不会动态修改
     'my_init_configs' => [
         [
             /** DataID */
-            'database.php',
+            'server.php',
             /** groupName */
             getenv('NACOS_GROUP'),
             /** namespaceId */
             getenv('NACOS_NAMESPACE'),
             /** filePath @desc 配置文件本地保存的地址 */
-            config_path('database.php')
+            config_path('server.php')
         ],
     ],
 ];
