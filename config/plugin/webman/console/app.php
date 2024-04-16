@@ -24,7 +24,7 @@ return [
 
     'exclude_files' => [
         '.env', '.env.example', '.editorconfig', 'LICENSE', 'composer.json', 'composer.lock', 'start.php',
-        'webman.phar', 'webman.bin'
+        'webman.phar', 'webman.bin', 'config/database.php', 'config/redis.php', 'config/server.php'
     ],
 
     // 打包二进制用的配置
