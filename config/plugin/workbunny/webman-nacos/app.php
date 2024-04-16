@@ -30,9 +30,9 @@ return [
             /** DataID */
             'redis.php',
             /** groupName */
-            'DEFAULT_GROUP',
+            getenv('NACOS_GROUP'),
             /** namespaceId */
-            '',
+            getenv('NACOS_NAMESPACE'),
             /** filePath @desc 配置文件本地保存的地址 */
             config_path('redis.php')
         ],
@@ -40,9 +40,9 @@ return [
             /** DataID */
             'database.php',
             /** groupName */
-            'DEFAULT_GROUP',
+            getenv('NACOS_GROUP'),
             /** namespaceId */
-            '',
+            getenv('NACOS_NAMESPACE'),
             /** filePath @desc 配置文件本地保存的地址 */
             config_path('database.php')
         ]
@@ -53,9 +53,9 @@ return [
             /** DataID */
             'database.php',
             /** groupName */
-            'DEFAULT_GROUP',
+            getenv('NACOS_GROUP'),
             /** namespaceId */
-            '',
+            getenv('NACOS_NAMESPACE'),
             /** filePath @desc 配置文件本地保存的地址 */
             config_path('database.php')
         ],
