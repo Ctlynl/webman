@@ -1,6 +1,6 @@
 <?php declare(strict_types=1);
 return [
-    'enable' => filter_var(getenv('NACOS_ENABLE'), FILTER_VALIDATE_BOOLEAN, FILTER_NULL_ON_FAILURE),
+    'enable' => filter_var(getenv('NACOS_ENABLE'), FILTER_VALIDATE_BOOLEAN) ?: false,
     'host' => getenv('NACOS_HOST'),
     'port' => getenv('NACOS_PORT'),
     'username' => getenv('NACOS_USER') ?: null,
@@ -46,5 +46,18 @@ return [
             /** filePath @desc 配置文件本地保存的地址 */
             config_path('database.php')
         ]
+    ],
+    // 启动初始化配置文件，进程启动后不会动态修改
+    'my_init_configs' => [
+        [
+            /** DataID */
+            'database.php',
+            /** groupName */
+            'DEFAULT_GROUP',
+            /** namespaceId */
+            '',
+            /** filePath @desc 配置文件本地保存的地址 */
+            config_path('database.php')
+        ],
     ],
 ];
