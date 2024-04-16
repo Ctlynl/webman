@@ -2,7 +2,7 @@
 
 global $argv;
 
-return [
+$myMonitorConfigArr = [
     // File update detection and automatic reload
     'monitor' => [
         'handler' => process\Monitor::class,
@@ -33,3 +33,9 @@ return [
         ]
     ]
 ];
+
+// 如果是-d就是后台运行则不运行该进程
+if (in_array('-d', $argv) && DIRECTORY_SEPARATOR === '/') {
+    unset($myMonitorConfigArr['monitor']);
+}
+return $myMonitorConfigArr;
